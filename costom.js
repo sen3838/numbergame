@@ -10,7 +10,7 @@ let history = [];
 
 function ramdomNum() {
   comnum = Math.floor(Math.random() * 100 - 1); //floor는 소수점 버리는 것
-  // console.log(comnum);
+  console.log(comnum);
 }
 ramdomNum();
 
@@ -31,19 +31,22 @@ function play() {
 
   if (history.includes(userNum)) {
     result.textContent = "이미 입력한 숫자입니다. 다른숫자 입력해주세요";
+    result.style.fontSize = "14px";
     return;
   }
 
   if (comnum > userNum) {
     // console.log("up");
-    result.textContent = "결과 : up";
-    document.querySelector("#imgbox").src = "bgSquare.png"; //이미지 변경
+    result.textContent = "UP";
+    document.querySelector("#imgbox").src = "img/up.png"; //이미지 변경
   } else if (comnum < userNum) {
     // console.log("down");
-    result.textContent = "결과 : down";
+    result.textContent = "DOWN";
+    document.querySelector("#imgbox").src = "img/down.png";
   } else {
     // console.log("bingo");
-    result.textContent = "정답입니다!!~bingo";
+    result.textContent = "BINGO !";
+    document.querySelector("#imgbox").src = "img/bingo.png";
   }
 
   chances = chances - 1;
@@ -60,6 +63,7 @@ function play() {
   if (gameover == true) {
     playBtn.disabled = true;
     chance.textContent = `기회를 모두 소진하였습니다.`;
+    document.querySelector("#imgbox").src = "img/gameover.png";
   }
 
   // 초기화버튼 - 모두 초기화
@@ -67,11 +71,11 @@ function play() {
   resetBtn.addEventListener("click", reset);
 
   function reset() {
-    document.querySelector("#imgbox").src = "logo0827.png";
+    document.querySelector("#imgbox").src = "img/gamestart.png";
     chances = 5;
-    chance.textContent = `남은찬스 ${chances}번`;
+    chance.textContent = `남은 찬스 ${chances}번`;
     playBtn.disabled = false;
-    result.textContent = "결과화면 : up / down / bingo";
+    result.textContent = "up / down / bingo";
     ramdomNum();
   }
   user.addEventListener("focus", () => {
